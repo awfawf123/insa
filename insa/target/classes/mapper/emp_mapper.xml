@@ -9,8 +9,8 @@
  	from T_USER
 	where LOGIN_ID = #{loginId}
 	</select>
-	<select id="getAuth" resultType="org.springframework.security.core.GrantedAuthority">
-	select LOGIN_ID, ROLE_NAME
+	<select id="getAuth" resultType="string">
+	select ROLE_NAME
  	from T_ROLE
  	inner join T_USER_ROLE on T_ROLE.ID = T_USER_ROLE.ROLE_ID
  	inner join T_USER on T_USER_ROLE.USER_ID = T_USER.ID

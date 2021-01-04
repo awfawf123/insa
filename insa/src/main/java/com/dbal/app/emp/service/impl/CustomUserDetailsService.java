@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.dbal.app.emp.UsersVO;
 import com.dbal.app.emp.mapper.EmpMapper;
 
-@Service
+@Service("authService")
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	EmpMapper dao;
@@ -29,8 +29,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 		//권한 지정
 		List<GrantedAuthority> auth = new ArrayList<>();
-		auth.add(new SimpleGrantedAuthority(vo.getRole()));
+		List<String> roles = dao.getAuth(vo);
+		auth.add(new SimpleGrantedAuthority(roles.get(0)));
+		vo.setAuthlist(auth);
 		//User 객체 return
-		return new SampleUser(username, vo.getPassword(), auth);
+		return vo;
 	}
 }

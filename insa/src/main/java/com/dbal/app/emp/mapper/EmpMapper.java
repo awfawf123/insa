@@ -17,6 +17,6 @@ public interface EmpMapper {
 	public List<Map<String, Object>> getEmpMap();
 	public List<Map<String, Object>> getDeptEmpCnt();
 	public UsersVO getUser(UsersVO usersVO);
-	public List<GrantedAuthority> getAuth(UsersVO usersVO);
+	public List<String> getAuth(UsersVO usersVO);
 }
 

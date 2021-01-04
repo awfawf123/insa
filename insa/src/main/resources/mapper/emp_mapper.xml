@@ -3,6 +3,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dbal.app.emp.mapper.EmpMapper">
+
+	<select id="getUser" resultType="users">
+	select LOGIN_ID, PASSWORD, 1
+ 	from T_USER
+	where LOGIN_ID = #{loginId}
+	</select>
+	<select id="getAuth" resultType="org.springframework.security.core.GrantedAuthority">
+	select LOGIN_ID, ROLE_NAME
+ 	from T_ROLE
+ 	inner join T_USER_ROLE on T_ROLE.ID = T_USER_ROLE.ROLE_ID
+ 	inner join T_USER on T_USER_ROLE.USER_ID = T_USER.ID
+ 	where LOGIN_ID = #{loginId}
+	</select>
+	 
 	<select id="getEmp" parameterType="emp" resultType="emp">
 		SELECT  
 		        first_name,
